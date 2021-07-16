@@ -2,6 +2,19 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const getDataFromApi = () => {
+    fetch(
+      'https://www.career.go.kr/inspct/openapi/test/questions?apikey=72612ba54c1decfb085cfe680f85ce3a&q=6'
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +30,7 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={getDataFromApi}>앙</button>
       </header>
     </div>
   );
