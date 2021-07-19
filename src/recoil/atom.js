@@ -10,4 +10,19 @@ const genderState = atom({
   default: '',
 });
 
-export { userNameState, genderState };
+const questionListState = atom({
+  key: 'questionListState',
+  default: [[]],
+});
+
+const questionAnswerListState = atom({
+  key: 'questionAnswerListState',
+  default: [],
+});
+
+export {
+  userNameState,
+  genderState,
+  questionListState,
+  questionAnswerListState,
+};
