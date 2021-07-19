@@ -5,7 +5,7 @@ import Survey from './pages/survey';
 function App() {
   const getDataFromApi = () => {
     fetch(
-      'https://www.career.go.kr/inspct/openapi/test/questions?apikey=72612ba54c1decfb085cfe680f85ce3a&q=6'
+      'https://www.career.go .kr/inspct/openapi/test/questions?apikey=72612ba54c1decfb085cfe680f85ce3a&q=6'
     )
       .then((response) => response.json())
       .then((data) => {
