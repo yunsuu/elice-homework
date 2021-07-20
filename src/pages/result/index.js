@@ -58,7 +58,6 @@ export default function End() {
 
   const makeChartData = () => {
     const result = [['', '점수']];
-    console.log(apiResult.result, apiResult.result === undefined);
     if (apiResult.result === undefined) return result;
     let string = apiResult.result.wonScore.split(' ');
     string = string.map((r) => {
@@ -69,12 +68,10 @@ export default function End() {
       const score = parseInt(string[i][1]);
       result.push([dataRow[idx], score]);
     }
-    console.log(result);
     return result;
   };
 
   const getDate = () => {
-    console.log(apiResult.inspct, apiResult.inspct === undefined);
     if (apiResult.inspct === undefined) return 0;
     return moment(apiResult.inspct.beginDtm).format('YYYY.MM.DD');
   };
@@ -84,7 +81,6 @@ export default function End() {
     for (let i = 0; i < questionAnswerList.length; i++) {
       answersString += `B${i + 1}=${questionAnswerList[i]} `;
     }
-    console.log(answersString);
     const timeStamp = new Date().getTime();
     const requestOptions = {
       method: 'POST',
@@ -107,14 +103,11 @@ export default function End() {
       .then((response) => response.json())
       .then((data) => {
         const queryString = getUrlParams(data.RESULT.url);
-        console.log(queryString);
-
         fetch(
           `https://inspct.career.go.kr/inspct/api/psycho/report?seq=${queryString.seq}`
         )
           .then((response) => response.json())
           .then((result) => {
-            console.log(result);
             setApiResult(result);
           });
       });
@@ -182,7 +175,7 @@ export default function End() {
       </Center>
       <Center margin={3}>
         <Link to="/start">
-          <Button onClick={resetTest}>테스트 다시보기</Button>
+          <Button onClick={resetTest}>다시검사하기</Button>
         </Link>
       </Center>
     </Flex>
