@@ -78,15 +78,21 @@ export default function Start(props) {
         <Text mb="8px">이름</Text>
         <Input onChange={inputUserName} placeholder="이름을 입력해주세요!" />
         <RadioGroup onChange={inputGender}>
-          <Radio colorScheme="green" value="남자">
+          <Radio margin={1} colorScheme="green" value="남자">
             남자
           </Radio>
-          <Radio colorScheme="red" value="여자">
+          <Radio margin={1} colorScheme="red" value="여자">
             여자
           </Radio>
         </RadioGroup>
         <Link to="/survey/0">
-          <Button isLoading={isInputEmpty()}>검사시작</Button>
+          <Button
+            loadingText="검사시작"
+            spinner={''}
+            isLoading={isInputEmpty()}
+          >
+            검사시작
+          </Button>
         </Link>
       </Stack>
     </Container>
