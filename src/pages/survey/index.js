@@ -57,7 +57,7 @@ export default function Survey({ match }) {
     else return `/survey/${parseInt(pageNumber) + 1}`;
   };
 
-  const isNotCheckableNext = () => {
+  const isCheckableNext = () => {
     const idx = pageNumber * 5;
     let cnt = 0;
     for (let i = 0; i < 5; i++) {
@@ -70,13 +70,6 @@ export default function Survey({ match }) {
   return (
     <div>
       <Heading as="h3">검사진행</Heading>
-      {/* <Button
-        onClick={() => {
-          console.log(questionAnswerList);
-        }}
-      >
-        sdfsd
-      </Button> */}
       <Text mb="8px">{getProgress()}</Text>
 
       <Progress colorScheme="green" size="lg" value={getProgress()} />
@@ -118,7 +111,7 @@ export default function Survey({ match }) {
           <Link to={setPrePageNumber()}>
             <Button>이전</Button>
           </Link>
-          {isNotCheckableNext() ? (
+          {isCheckableNext() ? (
             <Link to={setNextPageNumber()}>
               <Button isLoading={false}>다음</Button>
             </Link>
