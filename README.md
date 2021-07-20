@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+# 과제 실행 방법
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 첫번째
 
-## Available Scripts
+```jsx
+npm install
+```
 
-In the project directory, you can run:
+- 두번째
 
-### `yarn start`
+```jsx
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- 세번째 **(중요)**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[http://localhost:3000/start](http://localhost:3000/start) 로 들어가 설문을 시작해주세요!
 
-### `yarn test`
+설문 가장 첫화면의 링크입니다!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# 과제 설명
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- recoil을 이용해 상태관리를 하였습니다.
+- react-router를 이용해 url을 이용한 페이지 이동이 일어나도 SPA의 구조를 가질 수 있도록 만들었습니다.
+- chakra ui 라이브러리를 사용해 컴포넌트들을 구현하였습니다 ([https://chakra-ui.com/](https://chakra-ui.com/))
+- src/pages : 과제 구현에 필요한 각 화면들을 폴더별로 정리해 두었습니다.
+- src/recoil : recoil의 상태관리 변수들이 들어가 있는 파일입니다.
+- api key를 .env를 통해 분리해둘까 고민하다가 과제 체크하실때 번거로우실 것 같아 따로 처리하지 않았습니다.
