@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { questionListState, questionAnswerListState } from '../../recoil/atom';
 import produce from 'immer';
@@ -9,12 +8,14 @@ import {
   Radio,
   RadioGroup,
   Heading,
-  Input,
   Text,
   Box,
-  useFormControlContext,
   Flex,
   Progress,
+  Spacer,
+  Center,
+  Container,
+  Divider,
 } from '@chakra-ui/react';
 
 export default function Survey({ match }) {
@@ -68,58 +69,86 @@ export default function Survey({ match }) {
   };
 
   return (
-    <div>
-      <Heading as="h3">검사진행</Heading>
-      <Text mb="8px">{getProgress()}</Text>
-
-      <Progress colorScheme="green" size="lg" value={getProgress()} />
+    <Flex
+      marginTop={10}
+      marginLeft={10}
+      top
+      flexDirection="column"
+      height="100vh"
+    >
+      <Box width="80%">
+        <Flex>
+          <Heading as="h3">검사진행</Heading>
+          <Spacer />
+          <Heading as="h3">{getProgress()}</Heading>
+        </Flex>
+        <Divider marginTop={5} />
+        <Progress colorScheme="green" size="lg" value={getProgress()} />
+      </Box>
+      <Divider marginTop={5} />
       <Stack direction={'column'} spacing="24px">
         {questionList[pageNumber].map((question, idx) => {
           return (
             <Box
               key={`question_${question.qitemNo}`}
               borderWidth="2px"
-              borderRadius="lg"
               w="80%"
-              h="70%"
+              h="15vh"
               bg="purple.300"
             >
-              <Text color="white" fontSize="xl">
-                Q{question.qitemNo}. {question.question}
-              </Text>
-              <RadioGroup
-                defaultValue={
-                  questionAnswerList[question.qitemNo - 1] === 0
-                    ? ''
-                    : `${questionAnswerList[question.qitemNo - 1]}`
-                }
-                onChange={(data) => {
-                  onChangeAnswer(idx, question.qitemNo - 1, data);
-                }}
-              >
-                <Radio colorScheme="green" value={question.answerScore01}>
-                  {question.answer01}
-                </Radio>
-                <Radio colorScheme="red" value={question.answerScore02}>
-                  {question.answer02}
-                </Radio>
-              </RadioGroup>
+              <Flex flexDirection="column">
+                <Center marginTop="2vh">
+                  <Text color="white" fontSize="xl">
+                    Q{question.qitemNo}. {question.question}
+                  </Text>
+                </Center>
+                <Center marginTop="1vh">
+                  <RadioGroup
+                    defaultValue={
+                      questionAnswerList[question.qitemNo - 1] === 0
+                        ? ''
+                        : `${questionAnswerList[question.qitemNo - 1]}`
+                    }
+                    onChange={(data) => {
+                      onChangeAnswer(idx, question.qitemNo - 1, data);
+                    }}
+                  >
+                    <Radio
+                      margin={1}
+                      colorScheme="white"
+                      value={question.answerScore01}
+                    >
+                      {question.answer01}
+                    </Radio>
+                    <Radio
+                      margin={1}
+                      colorScheme="white"
+                      value={question.answerScore02}
+                    >
+                      {question.answer02}
+                    </Radio>
+                  </RadioGroup>
+                </Center>
+              </Flex>
             </Box>
           );
         })}
-        <Flex>
+        <Flex width="80%">
           <Link to={setPrePageNumber()}>
             <Button>이전</Button>
           </Link>
+          <Spacer />
           {isCheckableNext() ? (
             <Link to={setNextPageNumber()}>
               <Button isLoading={false}>다음</Button>
             </Link>
           ) : (
-            <Button isLoading={true}>다음</Button>
+            <Button loadingText="다음" spinner={''} isLoading={true}>
+              다음
+            </Button>
           )}
         </Flex>
       </Stack>
-    </div>
+    </Flex>
   );
 }

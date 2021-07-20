@@ -1,32 +1,40 @@
 import { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 import moment from 'moment';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   questionAnswerListState,
   userNameState,
   genderState,
+  questionListState,
 } from '../../recoil/atom';
-import produce from 'immer';
 import { Link } from 'react-router-dom';
 import {
   Button,
-  Stack,
-  Radio,
-  RadioGroup,
   Heading,
-  Input,
   Text,
-  Box,
-  useFormControlContext,
   Flex,
-  Progress,
+  Center,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
 } from '@chakra-ui/react';
 
 export default function End() {
   const questionAnswerList = useRecoilValue(questionAnswerListState);
   const userName = useRecoilValue(userNameState);
   const gender = useRecoilValue(genderState);
+
+  const setQuestionAnswerList = useSetRecoilState(questionAnswerListState);
+  const setUserNameState = useSetRecoilState(userNameState);
+  const setGenderState = useSetRecoilState(genderState);
+  const setQuestionListState = useSetRecoilState(questionListState);
+
   const [apiResult, setApiResult] = useState({});
   const dataRow = [
     '능력발휘',
@@ -49,7 +57,7 @@ export default function End() {
   }
 
   const makeChartData = () => {
-    const result = [['항목', '점수']];
+    const result = [['', '점수']];
     console.log(apiResult.result, apiResult.result === undefined);
     if (apiResult.result === undefined) return result;
     let string = apiResult.result.wonScore.split(' ');
@@ -112,38 +120,71 @@ export default function End() {
       });
   };
 
+  const resetTest = () => {
+    setQuestionAnswerList([]);
+    setUserNameState('');
+    setGenderState('');
+    // setQuestionListState([[]]);
+  };
+
   useEffect(() => {
     getResultFromApi();
   }, []);
 
   return (
-    <div>
-      <Heading as="h3">직업가치관검사 결과표</Heading>
-      <Text>이름 : {`${userName}`}</Text>
-      <Text>성별 {`${gender}`}</Text>
-      <Text>검사일 {`${getDate()}`}</Text>
-      <Chart
-        width={'900px'}
-        height={'300px'}
-        chartType="Bar"
-        loader={<div>Loading Chart</div>}
-        data={makeChartData()}
-        options={{
-          // Material design options
-          chart: {
-            title: 'Company Performance',
-          },
-        }}
-        // For tests
-        rootProps={{ 'data-testid': '2' }}
-      />
-      <Button
-        onClick={() => {
-          console.log(apiResult);
-        }}
-      >
-        테스트 다시보기
-      </Button>
-    </div>
+    <Flex
+      marginTop={10}
+      marginLeft={10}
+      top
+      flexDirection="column"
+      width="80%"
+      height="100vh"
+    >
+      <Center margin={10}>
+        <Text fontWeight="extrabold" fontSize="3xl" as="u">
+          직업가치관검사 결과표
+        </Text>
+      </Center>
+      <Center>
+        <Table borderWidth="1px" variant="simple">
+          <Thead>
+            <Tr>
+              <Th>이름</Th>
+              <Th>성별</Th>
+              <Th>검사일</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <Tr>
+              <Td>{`${userName}`}</Td>
+              <Td>{`${gender[0]}`}</Td>
+              <Td>{`${getDate()}`}</Td>
+            </Tr>
+          </Tbody>
+        </Table>
+      </Center>
+      <Center margin={3} marginTop={10}>
+        <Chart
+          width="100%"
+          height={'300px'}
+          chartType="Bar"
+          loader={<div>Loading Chart</div>}
+          data={makeChartData()}
+          options={{
+            // Material design options
+            chart: {
+              title: '직업가치관결과',
+            },
+          }}
+          // For tests
+          rootProps={{ 'data-testid': '2' }}
+        />
+      </Center>
+      <Center margin={3}>
+        <Link to="/start">
+          <Button onClick={resetTest}>테스트 다시보기</Button>
+        </Link>
+      </Center>
+    </Flex>
   );
 }
