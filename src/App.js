@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Start from './pages/start';
 import Survey from './pages/survey';
 import End from './pages/end';
+import Result from './pages/result';
 
 import { useSetRecoilState } from 'recoil';
 import { questionListState, questionAnswerListState } from './recoil/atom';
@@ -50,9 +51,7 @@ function App() {
           <Route path="/start" component={Start} />
           <Route path="/survey/:page" component={Survey} />
           <Route path="/end" component={End} />
-          {/* <Route path="/end" component={Reviews} />
-          <Route path="/result" component={Reviews} /> */}
-          {/* <Route component={PageNotFound} /> */}
+          <Route path="/result" component={Result} />
         </Switch>
       </Router>
     </div>

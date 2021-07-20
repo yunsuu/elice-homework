@@ -1,25 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { questionListState, questionAnswerListState } from '../../recoil/atom';
-import produce from 'immer';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 import {
-  Button,
-  Stack,
-  Radio,
-  RadioGroup,
-  Heading,
-  Input,
-  Text,
-  Box,
-  useFormControlContext,
-  Flex,
-  Progress,
-} from '@chakra-ui/react';
+  userNameState,
+  questionAnswerListState,
+  genderState,
+} from '../../recoil/atom';
+import { Link } from 'react-router-dom';
+import { Button, Heading } from '@chakra-ui/react';
 
 export default function End() {
-  const questionList = useRecoilValue(questionListState);
   const questionAnswerList = useRecoilValue(questionAnswerListState);
+  const userName = useRecoilValue(userNameState);
+  const gender = useRecoilValue(genderState);
 
   const getQuestionsFromApi = () => {
     const requestOptions = {
@@ -29,10 +21,10 @@ export default function End() {
         apikey: '72612ba54c1decfb085cfe680f85ce3a',
         qestrnSeq: '6',
         trgetSe: '100208',
-        name: '홍길동',
-        gender: '100323',
-        school: '세종대학교',
-        grade: '2',
+        name: `${userName}`,
+        gender: gender === '남자' ? 100323 : 100324,
+        school: '엘리스대학교',
+        // grade: '2',
         email: '',
         startDtm: 1550466291034,
         answers:
@@ -45,10 +37,6 @@ export default function End() {
         console.log(data);
       });
   };
-
-  useEffect(() => {
-    getQuestionsFromApi();
-  }, []);
 
   return (
     <div>
